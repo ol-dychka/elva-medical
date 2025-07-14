@@ -10,56 +10,96 @@ namespace server.Controllers
 {
     [ApiController]
     [Route("auth")]
-    public class AuthController(UserService userService, IConfiguration config) : ControllerBase
+    public class AuthController(UserService userService, TokenService tokenService, IConfiguration config) : ControllerBase
     {
         private readonly UserService _userService = userService;
+        private readonly TokenService _tokenService = tokenService;
         private readonly IConfiguration _config = config;
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUser user)
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            var existing = await _userService.GetByEmailAsync(user.Email);
-            if (existing != null) return BadRequest("Email already in use");
+            var user = await _userService.GetByEmailAsync(dto.Email);
+            if (user != null) return BadRequest("Email already in use");
+
+            var refreshToken = _tokenService.GenerateRefreshToken();
 
             User newUser = new()
             {
-                Email = user.Email,
-                HashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password),
-                Name = user.Name,
-                Phone = user.Phone,
-                EnrolledCourses = []
+                Email = dto.Email,
+                HashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Name = dto.Name,
+                Phone = dto.Phone,
+                EnrolledCourses = [],
+                RefreshToken = refreshToken,
+                RefreshTokenExpiry = DateTime.UtcNow.AddDays(14)
             };
-            await _userService.CreateAsync(newUser); 
+            await _userService.CreateAsync(newUser);
 
-            var token = GenerateJwtToken(newUser);
-            return Ok(new UserDto(newUser, token));
+            var accessToken = _tokenService.GenerateAccessToken(newUser.Id!, newUser.Email);
+
+            Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(14),
+            });
+
+            return Ok(new { accessToken });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUser user)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var existing = await _userService.GetByEmailAsync(user.Email);
-            if (existing == null || !BCrypt.Net.BCrypt.Verify(user.Password, existing.HashedPassword))
-                return Unauthorized("Invalid credentials");
+            var user = await _userService.ValidateByCredentialsAsync(dto.Email, dto.Password);
+            if (user == null) return Unauthorized("Invalid credentials");
 
-            var token = GenerateJwtToken(existing);
-            return Ok(new UserDto(existing, token));
+            var accessToken = _tokenService.GenerateAccessToken(user.Id!, user.Email);
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            await _userService.SaveRefreshTokenAsync(user.Id!, refreshToken);
+
+            Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(14),
+            });
+
+            return Ok(new { accessToken });
         }
 
-        private string GenerateJwtToken(User user)
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh()
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            if (!Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
+                return Unauthorized();
 
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                expires: DateTime.UtcNow.AddMinutes(int.Parse(_config["Jwt:ExpiresInMinutes"]!)),
-                signingCredentials: creds,
-                claims: [new Claim(ClaimTypes.NameIdentifier, user.Id!), new Claim(ClaimTypes.Email, user.Email)]
-            );
+            var user = await _userService.GetByRefreshTokenAsync(refreshToken);
+            if (user == null)
+                return Unauthorized();
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var newAccessToken = _tokenService.GenerateAccessToken(user.Id!, user.Email);
+
+            return Ok(new { accessToken = newAccessToken });
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            // Read the refresh token from the cookie
+            if (!Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
+                return Ok(); // No token = already logged out
+
+            // Remove the refresh token from the DB
+            await _userService.RemoveRefreshTokenAsync(refreshToken);
+
+            // Clear the cookie on the client
+            Response.Cookies.Delete("refreshToken");
+
+            return Ok();
         }
     }
 }

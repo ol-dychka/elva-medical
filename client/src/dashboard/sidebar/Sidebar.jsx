@@ -1,16 +1,12 @@
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import Account from "../../assets/account.svg";
-import OutletLink from "./outletLink";
+import OutletLink from "./OutletLink";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeUser } from "../../store/reducers/user";
-import { removeToken } from "../../store/reducers/token";
+import { useSelector } from "react-redux";
+import Logout from "../../auth/Logout";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const [outlet, setOutlet] = useState(null);
   const location = useLocation();
@@ -30,16 +26,7 @@ const Sidebar = () => {
           <p className="font-semibold text-white text-center">
             Logged in as {user ? user.name : "88"}
           </p>
-          <button
-            className="rounded-xl bg-white text-emerald-800 py-2 px-8 font-semibold"
-            onClick={() => {
-              dispatch(removeUser());
-              dispatch(removeToken());
-              navigate("login");
-            }}
-          >
-            Log Out
-          </button>
+          <Logout />
         </div>
       </div>
 

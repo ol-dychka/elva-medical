@@ -27,5 +27,11 @@ namespace server.Models
         [BsonRepresentation(BsonType.ObjectId)]
 
         public required List<string> EnrolledCourses { get; set; }
+
+        [BsonElement("refreshToken")]
+        public string? RefreshToken { get; set; }
+
+        [BsonElement("refreshTokenExpiry")]
+        public DateTime? RefreshTokenExpiry { get; set; }
     }
 }

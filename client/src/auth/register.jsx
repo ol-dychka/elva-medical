@@ -1,5 +1,5 @@
-import CustomInput from "./customInput";
-import CustomPassword from "./customPassword";
+import CustomInput from "./CustomInput";
+import CustomPassword from "./CustomPassword";
 import api from "../api";
 import Facebook from "../assets/facebook-color.svg";
 import Instagram from "../assets/instagram-color.svg";
@@ -31,20 +31,32 @@ const Register = () => {
     }
 
     try {
-      const res = await api.post("/auth/register", {
+      const tokenRes = await api.post("/auth/register", {
         email,
         password,
         name,
         phone,
       });
-      dispatch(setToken(res.data.token));
-      dispatch(setUser(res.data));
+      console.log("nigger token: ", tokenRes.data);
+
+      if (!tokenRes.data?.accessToken) {
+        return;
+      }
+
+      dispatch(setToken(tokenRes.data.accessToken));
+
+      const userRes = await api.get("/user");
+
+      console.log(userRes.data);
+
+      dispatch(setUser(userRes.data));
       navigate("/");
     } catch (err) {
-      setError("Invalid credentials");
-      console.error(err);
+      setError("invalid credentials");
+      console.log(err);
     }
   };
+
   return (
     <div className="p-8 flex flex-col justify-between h-lvh">
       <p className="text-center text-3xl text-emerald-800 font-semibold">

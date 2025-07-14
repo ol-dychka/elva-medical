@@ -9,6 +9,7 @@ builder.Services.AddControllers(options =>
     options.Conventions.Insert(0, new GlobalRoutePrefixConvention("api"));
 });
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<TokenService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,8 +18,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReact", policy =>
     {
         policy.WithOrigins("http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+            .AllowCredentials()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 

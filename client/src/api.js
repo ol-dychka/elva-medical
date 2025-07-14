@@ -1,15 +1,17 @@
-// src/api.js
 import axios from "axios";
+import store from "./store/store";
 
 // Create Axios instance
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // Adjust if your backend is hosted elsewhere
+  withCredentials: true,
+  baseURL: "http://localhost:5000/api",
 });
 
 // Attach access token (if available) to each request
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("jwt"); // Or use cookies if preferred
+    const token = store.getState().token.value;
+    console.log("token interceptor : ", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
