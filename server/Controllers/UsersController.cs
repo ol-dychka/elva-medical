@@ -19,7 +19,7 @@ namespace server.Controllers
         {
             string? email = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = await _userService.GetByEmailAsync(email!);
-            return user != null ? Ok(user) : NotFound();
+            return user != null ? Ok(new UserDto(user)) : NotFound();
         }
     }
 }

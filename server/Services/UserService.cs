@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using MongoDB.Driver;
 using server.Models;
 
@@ -58,6 +59,23 @@ namespace server.Services
                 Builders<User>.Filter.Eq(u => u.RefreshToken, refreshToken),
                 update
             );
+        }
+
+        public bool IsValidPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password)) return false;
+
+            // At least 8 characters, 1 uppercase, 1 lowercase, 1 digit
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$";
+            return Regex.IsMatch(password, pattern);
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return false;
+
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
     }
 }

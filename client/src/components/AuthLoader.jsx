@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import api from "./api";
-import { setUser } from "./store/reducers/user";
-import { setToken } from "./store/reducers/token";
+import api from "../api/api";
+import { setUser } from "../store/reducers/user";
+import { setToken } from "../store/reducers/token";
 
 const AuthLoader = ({ children }) => {
   const dispatch = useDispatch();

@@ -1,12 +1,11 @@
 import { Route, Routes } from "react-router";
-import "./index.css";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./Dashboard";
 import Billing from "./outlets/Billing";
 import Courses from "./outlets/Courses";
 import Home from "./outlets/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import AuthLoader from "./AuthLoader";
+import AuthLoader from "../components/AuthLoader";
 
 const App = () => {
   return (

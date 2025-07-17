@@ -1,9 +1,8 @@
 import { useLocation } from "react-router";
-import Account from "../../assets/account.svg";
-import OutletLink from "./OutletLink";
+import OutletLink from "../components/OutletLink";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Logout from "../../auth/Logout";
+import Logout from "../components/Logout";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.user.value);

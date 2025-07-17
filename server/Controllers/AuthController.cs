@@ -20,7 +20,13 @@ namespace server.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
             var user = await _userService.GetByEmailAsync(dto.Email);
-            if (user != null) return BadRequest("Email already in use");
+            if (user != null) return BadRequest("Email is already in use");
+
+            if (!_userService.IsValidPassword(dto.Password))
+                return BadRequest("Password must be 8+ characters with a capital letter and a number");
+
+            if (!_userService.IsValidEmail(dto.Email))
+                return BadRequest("Email is not correct or not supported");
 
             var refreshToken = _tokenService.GenerateRefreshToken();
 
@@ -53,7 +59,7 @@ namespace server.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
             var user = await _userService.ValidateByCredentialsAsync(dto.Email, dto.Password);
-            if (user == null) return Unauthorized("Invalid credentials");
+            if (user == null) return BadRequest("Invalid credentials");
 
             var accessToken = _tokenService.GenerateAccessToken(user.Id!, user.Email);
             var refreshToken = _tokenService.GenerateRefreshToken();

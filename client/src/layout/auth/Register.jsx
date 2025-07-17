@@ -1,14 +1,12 @@
-import CustomInput from "./CustomInput";
-import CustomPassword from "./CustomPassword";
-import api from "../api";
-import Facebook from "../assets/facebook-color.svg";
-import Instagram from "../assets/instagram-color.svg";
-import Gmail from "../assets/gmail-color.svg";
+import CustomInput from "../../components/CustomInput";
+import CustomPassword from "../../components/CustomPassword";
+import Facebook from "../../assets/facebook-color.svg";
+import Instagram from "../../assets/instagram-color.svg";
+import Gmail from "../../assets/gmail-color.svg";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store/reducers/token";
-import { setUser } from "../store/reducers/user";
+import { register } from "../../handlers/authHandlers";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -25,35 +23,39 @@ const Register = () => {
     e.preventDefault();
     setError("");
 
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
     if (password !== confirmPassword) {
       setError("Passwords don't match");
       return;
     }
 
+    if (!emailPattern.test(email)) {
+      setError("Email is not correct or not supported");
+      return;
+    }
+
+    if (!passwordPattern.test(password)) {
+      setError(
+        "Password must be 8+ characters with a capital letter and a number"
+      );
+      return;
+    }
+
     try {
-      const tokenRes = await api.post("/auth/register", {
-        email,
-        password,
-        name,
-        phone,
-      });
-      console.log("nigger token: ", tokenRes.data);
-
-      if (!tokenRes.data?.accessToken) {
-        return;
-      }
-
-      dispatch(setToken(tokenRes.data.accessToken));
-
-      const userRes = await api.get("/user");
-
-      console.log(userRes.data);
-
-      dispatch(setUser(userRes.data));
-      navigate("/");
+      await register(
+        {
+          email,
+          password,
+          name,
+          phone,
+        },
+        dispatch,
+        navigate
+      );
     } catch (err) {
-      setError("invalid credentials");
-      console.log(err);
+      setError(err.message);
     }
   };
 

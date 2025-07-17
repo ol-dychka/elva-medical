@@ -1,14 +1,12 @@
-import CustomInput from "./CustomInput";
-import CustomPassword from "./CustomPassword";
-import api from "../api";
-import Facebook from "../assets/facebook-color.svg";
-import Instagram from "../assets/instagram-color.svg";
-import Gmail from "../assets/gmail-color.svg";
+import CustomInput from "../../components/CustomInput";
+import CustomPassword from "../../components/CustomPassword";
+import Facebook from "../../assets/facebook-color.svg";
+import Instagram from "../../assets/instagram-color.svg";
+import Gmail from "../../assets/gmail-color.svg";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../store/reducers/token";
-import { setUser } from "../store/reducers/user";
+import { login } from "../../handlers/authHandlers";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,24 +22,9 @@ const Login = () => {
     setError("");
 
     try {
-      const tokenRes = await api.post("/auth/login", { email, password });
-      console.log("nigger token: ", tokenRes.data);
-
-      if (!tokenRes.data?.accessToken) {
-        return;
-      }
-
-      dispatch(setToken(tokenRes.data.accessToken));
-
-      const userRes = await api.get("/user");
-
-      console.log(userRes.data);
-
-      dispatch(setUser(userRes.data));
-      navigate("/");
+      await login({ email, password }, dispatch, navigate);
     } catch (err) {
-      setError("invalid credentials");
-      console.log(err);
+      setError(err.message);
     }
   };
 

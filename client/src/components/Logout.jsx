@@ -1,23 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { removeUser } from "../store/reducers/user";
-import { removeToken } from "../store/reducers/token";
-import api from "../api";
+import { logout } from "../handlers/authHandlers";
 
 const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    try {
-      await api.post("/auth/logout");
-
-      dispatch(removeUser());
-      dispatch(removeToken());
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-    }
+    await logout(dispatch, navigate);
   };
 
   return (
