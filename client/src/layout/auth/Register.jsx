@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <div className="p-8 flex flex-col justify-between h-lvh">
-      <p className="text-center text-3xl text-emerald-800 font-semibold">
+      <p className="text-center text-3xl text-emerald-700 font-semibold">
         Elva Registration
       </p>
       <form onSubmit={handleRegister}>

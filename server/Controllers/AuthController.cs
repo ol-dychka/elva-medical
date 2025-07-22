@@ -36,7 +36,9 @@ namespace server.Controllers
                 HashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 Name = dto.Name,
                 Phone = dto.Phone,
-                EnrolledCourses = [],
+                Courses = [],
+                Appointments = [],
+                Prescriptions = [],
                 RefreshToken = refreshToken,
                 RefreshTokenExpiry = DateTime.UtcNow.AddDays(14)
             };

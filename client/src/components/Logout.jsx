@@ -12,7 +12,7 @@ const Logout = () => {
 
   return (
     <button
-      className="rounded-xl bg-white text-emerald-800 py-2 px-8 font-semibold"
+      className="rounded-xl bg-white text-emerald-800 py-2 px-8 font-semibold cursor-pointer"
       onClick={handleLogout}
     >
       Log Out

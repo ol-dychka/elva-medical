@@ -16,17 +16,20 @@ namespace server.Models
         public required string HashedPassword { get; set; }
 
         [BsonElement("name")]
-
         public required string Name { get; set; }
 
         [BsonElement("phone")]
-
         public required string Phone { get; set; }
 
-        [BsonElement("enrolledCourses")]
+        [BsonElement("courses")]
         [BsonRepresentation(BsonType.ObjectId)]
+        public required List<string> Courses { get; set; }
 
-        public required List<string> EnrolledCourses { get; set; }
+        [BsonElement("appointments")]
+        public required List<Appointment> Appointments { get; set; }
+
+        [BsonElement("prescriptions")]
+        public required List<Prescription> Prescriptions { get; set; }
 
         [BsonElement("refreshToken")]
         public string? RefreshToken { get; set; }

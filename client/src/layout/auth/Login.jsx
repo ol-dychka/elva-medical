@@ -5,13 +5,12 @@ import Instagram from "../../assets/instagram-color.svg";
 import Gmail from "../../assets/gmail-color.svg";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../handlers/authHandlers";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token.value);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,8 +29,8 @@ const Login = () => {
 
   return (
     <div className="p-8 flex flex-col justify-between h-lvh">
-      <p className="text-center text-3xl text-emerald-800 font-semibold">
-        Login to Elva {token}
+      <p className="text-center text-3xl text-emerald-700 font-semibold">
+        Login to Elva
       </p>
       <form onSubmit={handleLogin}>
         <div className="flex flex-col justify-center items-center gap-2">
