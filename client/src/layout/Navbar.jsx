@@ -1,5 +1,6 @@
 import Search from "../assets/search.svg";
 import Settings from "../assets/settings.svg";
+import Logout from "../components/Logout";
 
 const Navbar = () => {
   return (
@@ -13,6 +14,7 @@ const Navbar = () => {
         />
         <img src={Search} alt="Search" className="h-6 w-6" />
       </div>
+      <Logout />
       <img src={Settings} alt="Settings" className="h-6 w-6" />
     </div>
   );

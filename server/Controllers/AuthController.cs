@@ -30,18 +30,7 @@ namespace server.Controllers
 
             var refreshToken = _tokenService.GenerateRefreshToken();
 
-            User newUser = new()
-            {
-                Email = dto.Email,
-                HashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Name = dto.Name,
-                Phone = dto.Phone,
-                Courses = [],
-                Appointments = [],
-                Prescriptions = [],
-                RefreshToken = refreshToken,
-                RefreshTokenExpiry = DateTime.UtcNow.AddDays(14)
-            };
+            User newUser = new(dto, refreshToken);
             await _userService.CreateAsync(newUser);
 
             var accessToken = _tokenService.GenerateAccessToken(newUser.Id!, newUser.Email);

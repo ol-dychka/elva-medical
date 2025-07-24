@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using server.Models;
 
@@ -18,6 +19,9 @@ namespace server.Services
         // case if user is logging in
         public async Task<User?> GetByEmailAsync(string email) =>
             await _users.Find(u => u.Email == email).FirstOrDefaultAsync();
+
+        public async Task<User?> GetByIdAsync(string Id) =>
+            await _users.Find(u => u.Id == Id).FirstOrDefaultAsync();
 
         // case if user is logged in
         public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
@@ -84,6 +88,20 @@ namespace server.Services
             var update = Builders<User>.Update
                 .Set(u => u.Name, user.Name)
                 .Set(u => u.Phone, user.Phone);
+
+            await _users.UpdateOneAsync(filter, update);
+        }
+
+        public async Task UpdateAppointmentAsync(string userId, ObjectId appointmentId, DateTime newDate)
+        {
+            var filter = Builders<User>.Filter.And(
+                Builders<User>.Filter.Eq(u => u.Id, userId),
+                Builders<User>.Filter.ElemMatch(u => u.Appointments,
+                    a => a.Id == appointmentId)
+            );
+
+            var update = Builders<User>.Update
+                .Set("appointments.$.date", newDate);
 
             await _users.UpdateOneAsync(filter, update);
         }

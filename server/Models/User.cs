@@ -10,31 +10,54 @@ namespace server.Models
         public string? Id { get; set; }
 
         [BsonElement("email")]
-        public required string Email { get; set; }
+        public string Email { get; set; }
 
         [BsonElement("hashedPassword")]
-        public required string HashedPassword { get; set; }
+        public string HashedPassword { get; set; }
 
         [BsonElement("name")]
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         [BsonElement("phone")]
-        public required string Phone { get; set; }
+        public string Phone { get; set; }
 
         [BsonElement("courses")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public required List<string> Courses { get; set; }
+        public List<string> Courses { get; set; }
 
         [BsonElement("appointments")]
-        public required List<Appointment> Appointments { get; set; }
+        public List<Appointment> Appointments { get; set; }
 
         [BsonElement("prescriptions")]
-        public required List<Prescription> Prescriptions { get; set; }
+        public List<Prescription> Prescriptions { get; set; }
 
         [BsonElement("refreshToken")]
         public string? RefreshToken { get; set; }
 
         [BsonElement("refreshTokenExpiry")]
         public DateTime? RefreshTokenExpiry { get; set; }
+
+        public User(RegisterDto dto, String refreshToken)
+        {
+            Email = dto.Email;
+            HashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+            Name = dto.Name;
+            Phone = dto.Phone;
+            Courses = [];
+            Appointments = [ new Appointment {
+                Title = "Monthly check-up",
+                DoctorName = "Dr. Martin Black",
+                RoomNumber = "503-A",
+                Date = DateTime.UtcNow.AddDays(5)
+            }];
+            Prescriptions = [ new Prescription {
+                Medication = "Aderrall",
+                Frequency = "3 pills every day",
+                StartDate = DateTime.UtcNow.AddDays(-3),
+                FinishDate = DateTime.UtcNow.AddDays(11)
+            }];
+            RefreshToken = refreshToken;
+            RefreshTokenExpiry = DateTime.UtcNow.AddDays(14);
+        }
     }
 }

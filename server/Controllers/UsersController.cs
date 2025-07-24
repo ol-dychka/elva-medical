@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using server.Models;
 using server.Services;
 
@@ -39,6 +40,24 @@ namespace server.Controllers
                 return Ok(new UserDto(user));
             }
 
+            return BadRequest("Could not update information. Try again later");
+        }
+
+        [Authorize]
+        [HttpPost("appointment/{id}")]
+        public async Task<IActionResult> UpdateAppointment(UpdateAppointmentDto dto, string id)
+        {
+            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId != null)
+            {
+                var parsedId = ObjectId.Parse(id);
+                await _userService.UpdateAppointmentAsync(userId, parsedId, dto.Date);
+
+                var user = await _userService.GetByIdAsync(userId);
+                return  user == null ? NotFound() : Ok(new UserDto(user));
+            }
+            
             return BadRequest("Could not update information. Try again later");
         }
     }

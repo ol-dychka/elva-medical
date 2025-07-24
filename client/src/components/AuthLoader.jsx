@@ -26,6 +26,8 @@ const AuthLoader = ({ children }) => {
 
         const userRes = await api.get("/user");
 
+        console.log("user: ", userRes);
+
         dispatch(setUser(userRes.data));
 
         // artificial delay for loading spinner showcase

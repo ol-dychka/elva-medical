@@ -5,6 +5,9 @@ namespace server.Models
         public string Email { get; set; } = user.Email;
         public string Name { get; set; } = user.Name;
         public string Phone { get; set; } = user.Phone;
-        public List<string> EnrolledCourses { get; set; } = user.EnrolledCourses;
+        public List<string> Courses { get; set; } = user.Courses;
+        public List<AppointmentDto> Appointments { get; set; } =
+            [.. user.Appointments.Select(a => new AppointmentDto(a))];
+        public List<Prescription> Prescriptions { get; set; } = user.Prescriptions;
     }
 }

@@ -6,7 +6,7 @@ import Home from "./outlets/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AuthLoader from "../components/AuthLoader";
-import Appointments from "./outlets/Appointments";
+import Appointments from "./outlets/appointments/Appointments";
 import Prescriptions from "./outlets/Prescriptions";
 import Profile from "./outlets/Profile";
 
