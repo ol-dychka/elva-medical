@@ -25,19 +25,16 @@ namespace server.Controllers
 
         [Authorize]
         [HttpPost("update")]
-        public async Task<IActionResult> Update(UpdateDto dto)
+        public async Task<IActionResult> Update(UpdateUserDto dto)
         {
-            string? email = User.FindFirst(ClaimTypes.Email)?.Value;
-            var user = await _userService.GetByEmailAsync(email!);
+            string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (user != null)
+            if (id != null)
             {
-                user.Name = dto.Name;
-                user.Phone = dto.Phone;
+                await _userService.UpdateUserAsync(id, dto.Name, dto.Phone);
 
-                await _userService.UpdateAsync(user);
-
-                return Ok(new UserDto(user));
+                var user = await _userService.GetByIdAsync(id);
+                return  user == null ? NotFound() : Ok(new UserDto(user));
             }
 
             return BadRequest("Could not update information. Try again later");

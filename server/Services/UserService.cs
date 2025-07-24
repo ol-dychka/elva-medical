@@ -82,12 +82,12 @@ namespace server.Services
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateUserAsync(string id, string name, string phone)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
+            var filter = Builders<User>.Filter.Eq(u => u.Id, id);
             var update = Builders<User>.Update
-                .Set(u => u.Name, user.Name)
-                .Set(u => u.Phone, user.Phone);
+                .Set(u => u.Name, name)
+                .Set(u => u.Phone, phone);
 
             await _users.UpdateOneAsync(filter, update);
         }
