@@ -7,7 +7,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AuthLoader from "../components/AuthLoader";
 import Appointments from "./outlets/appointments/Appointments";
-import Prescriptions from "./outlets/Prescriptions";
+import Prescriptions from "./outlets/prescriptions/Prescriptions";
 import Profile from "./outlets/Profile";
 
 const App = () => {

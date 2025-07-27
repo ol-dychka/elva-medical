@@ -7,20 +7,14 @@ import { useState } from "react";
 import api from "../../../api/api";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../store/reducers/user";
+import { formatDateTime } from "../../../helpers/formatDate";
 
 const Appointment = ({ appointment }) => {
   const dispatch = useDispatch();
 
   const { id, title, doctorName, roomNumber, date } = appointment;
 
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(date));
+  const formattedDate = formatDateTime(date);
 
   const [isCalendar, setIsCalendar] = useState(false);
   const [newDate, setNewDate] = useState(null);
