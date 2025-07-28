@@ -37,13 +37,13 @@ namespace server.Models
         [BsonElement("refreshTokenExpiry")]
         public DateTime? RefreshTokenExpiry { get; set; }
 
-        public User(RegisterDto dto, String refreshToken)
+        public User(RegisterDto dto, string refreshToken)
         {
             Email = dto.Email;
             HashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             Name = dto.Name;
             Phone = dto.Phone;
-            Courses = [];
+            Courses = ["6886ecdf0519fcd6949c10c2"];
             Appointments = [ new Appointment {
                 Title = "Monthly check-up",
                 DoctorName = "Dr. Martin Black",

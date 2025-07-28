@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import Dashboard from "./Dashboard";
 import Billing from "./outlets/Billing";
-import Courses from "./outlets/Courses";
+import Courses from "./outlets/courses/Courses";
 import Home from "./outlets/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";

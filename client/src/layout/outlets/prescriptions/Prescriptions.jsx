@@ -7,8 +7,8 @@ const Prescriptions = () => {
   return (
     <div className="px-4 py-8 relative h-full">
       <div className="space-y-8 w-1/2">
-        {prescriptions.map((prescription) => (
-          <Prescription prescription={prescription} key={prescription.id} />
+        {prescriptions.map((prescription, i) => (
+          <Prescription prescription={prescription} key={i} />
         ))}
       </div>
     </div>

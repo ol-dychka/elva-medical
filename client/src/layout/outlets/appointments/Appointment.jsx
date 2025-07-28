@@ -38,7 +38,7 @@ const Appointment = ({ appointment }) => {
 
   return (
     <div className="[&>*]:p-4 relative">
-      <div className="bg-emerald-700 text-white rounded-t-lg flex justify-between items-center">
+      <div className="bg-emerald-700 font-semibold text-white rounded-t-lg flex justify-between items-center">
         <p>{title}</p>
         <img
           src={isCalendar ? Check : Calendar}
@@ -47,7 +47,7 @@ const Appointment = ({ appointment }) => {
           onClick={handleCalendar}
         />
       </div>
-      <div className="bg-slate-100 rounded-b-lg">
+      <div className="bg-slate-100 rounded-b-lg space-y-4">
         <div className="flex gap-4 items-center">
           <img src={Account} alt="account" className="h-4 w-4" />
           <p>{doctorName}</p>

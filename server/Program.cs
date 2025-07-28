@@ -10,6 +10,7 @@ builder.Services.AddControllers(options =>
 });
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<CourseService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

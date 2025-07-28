@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using server.Models;
@@ -10,9 +9,10 @@ namespace server.Controllers
 {
     [ApiController]
     [Route("user")]
-    public class UsersController(UserService userService) : ControllerBase
+    public class UsersController(UserService userService, CourseService courseService) : ControllerBase
     {
         private readonly UserService _userService = userService;
+        private readonly CourseService _courseService = courseService;
 
         [Authorize]
         [HttpGet]
@@ -20,7 +20,14 @@ namespace server.Controllers
         {
             string? email = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = await _userService.GetByEmailAsync(email!);
-            return user != null ? Ok(new UserDto(user)) : NotFound();
+            
+            if (user != null)
+            {
+                var courses = await _courseService.FindMultipleAsync(user.Courses);
+                return Ok(new UserDto(user, courses));
+            }
+
+            return NotFound();
         }
 
         [Authorize]
@@ -34,7 +41,13 @@ namespace server.Controllers
                 await _userService.UpdateUserAsync(id, dto.Name, dto.Phone);
 
                 var user = await _userService.GetByIdAsync(id);
-                return  user == null ? NotFound() : Ok(new UserDto(user));
+                if (user != null)
+                {
+                    var courses = await _courseService.FindMultipleAsync(user.Courses);
+                    return Ok(new UserDto(user, courses));
+                }
+
+                return NotFound();
             }
 
             return BadRequest("Could not update information. Try again later");
@@ -52,7 +65,13 @@ namespace server.Controllers
                 await _userService.UpdateAppointmentAsync(userId, parsedId, dto.Date);
 
                 var user = await _userService.GetByIdAsync(userId);
-                return  user == null ? NotFound() : Ok(new UserDto(user));
+                if (user != null)
+                {
+                    var courses = await _courseService.FindMultipleAsync(user.Courses);
+                    return Ok(new UserDto(user, courses));
+                }
+
+                return NotFound();
             }
             
             return BadRequest("Could not update information. Try again later");

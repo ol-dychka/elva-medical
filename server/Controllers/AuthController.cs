@@ -10,15 +10,31 @@ namespace server.Controllers
 {
     [ApiController]
     [Route("auth")]
-    public class AuthController(UserService userService, TokenService tokenService, IConfiguration config) : ControllerBase
+    public class AuthController(UserService userService, TokenService tokenService, CourseService courseService, IConfiguration config) : ControllerBase
     {
         private readonly UserService _userService = userService;
         private readonly TokenService _tokenService = tokenService;
+        private readonly CourseService _courseService = courseService;
         private readonly IConfiguration _config = config;
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
+            //delete later
+            // var newCourse = new Course
+            // {
+            //     Title = "Yoga for improved mobility",
+            //     Instructor = "James Watkins",
+            //     StartDate = DateTime.UtcNow,
+            //     FinishDate = DateTime.UtcNow.AddMonths(2),
+            //     Schedule = new List<CourseSession>
+            //     {
+            //         new() { Day = "Monday", Time = "10:00 AM" },
+            //         new() { Day = "Wednesday", Time = "2:30 PM" }
+            //     }
+            // };
+            // await _courseService.CreateAsync(newCourse);
+
             var user = await _userService.GetByEmailAsync(dto.Email);
             if (user != null) return BadRequest("Email is already in use");
 
