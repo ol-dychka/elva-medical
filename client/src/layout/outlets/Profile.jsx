@@ -31,10 +31,13 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <div className="px-4 py-8 relative h-full">
+    <div className="relative h-full px-4 py-8">
       <div className="space-y-8">
-        <p className="font-semibold text-lg text-emerald-700">
-          Email: <span className="text-black">{user && user.email}</span>
+        <p className="text-springgreen dark:text-aliceblue text-lg font-semibold">
+          Email:{" "}
+          <span className="text-richblack dark:text-white">
+            {user && user.email}
+          </span>
         </p>
         <EditInput name="Name" value={name} onChange={setName} />
         <EditInput name="Phone Number" value={phone} onChange={setPhone} />
@@ -42,7 +45,7 @@ const Profile = () => {
 
       <button
         onClick={handleSave}
-        className="cursor-pointer bg-emerald-700 rounded-xl text-white text-lg font-semibold px-4 py-2 absolute bottom-16 right-16"
+        className="bg-springgreen absolute right-16 bottom-16 cursor-pointer rounded-xl px-4 py-2 text-lg font-semibold text-white"
       >
         Save
       </button>

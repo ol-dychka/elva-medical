@@ -37,8 +37,8 @@ const Appointment = ({ appointment }) => {
   };
 
   return (
-    <div className="[&>*]:p-4 relative">
-      <div className="bg-emerald-700 font-semibold text-white rounded-t-lg flex justify-between items-center">
+    <div className="relative [&>*]:p-4">
+      <div className="bg-springgreen flex items-center justify-between rounded-t-lg font-semibold text-white">
         <p>{title}</p>
         <img
           src={isCalendar ? Check : Calendar}
@@ -47,16 +47,16 @@ const Appointment = ({ appointment }) => {
           onClick={handleCalendar}
         />
       </div>
-      <div className="bg-slate-100 rounded-b-lg space-y-4">
-        <div className="flex gap-4 items-center">
+      <div className="bg-ghostwhite dark:bg-gunmetal space-y-4 rounded-b-lg dark:text-white">
+        <div className="flex items-center gap-4">
           <img src={Account} alt="account" className="h-4 w-4" />
           <p>{doctorName}</p>
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <img src={Door} alt="door" className="h-4 w-4" />
           <p>{roomNumber}</p>
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <img src={Clock} alt="clock" className="h-4 w-4" />
           <p>{formattedDate}</p>
         </div>
@@ -66,7 +66,7 @@ const Appointment = ({ appointment }) => {
         <div className="absolute top-0 -right-50 flex flex-col gap-4">
           <input
             type="date"
-            className="border-2 border-slate-300 p-2 rounded-xl focus:outline-emerald-800"
+            className="focus:outline-springgreen border-aliceblue rounded-xl border-2 p-2"
             onChange={(e) => {
               setNewDate(e.target.value);
             }}
@@ -74,7 +74,7 @@ const Appointment = ({ appointment }) => {
           <input
             type="time"
             step="60"
-            className="border-2 border-slate-300 p-2 rounded-xl focus:outline-emerald-800"
+            className="focus:outline-springgreen border-aliceblue rounded-xl border-2 p-2"
             onChange={(e) => {
               setNewTime(e.target.value);
             }}

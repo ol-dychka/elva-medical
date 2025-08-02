@@ -20,15 +20,18 @@ const Sidebar = () => {
   }, [location]);
 
   return (
-    <div className="p-3 w-full h-full bg-linear-to-br from-teal-900 to-emerald-600">
-      <div className="flex gap-4 justify-center my-8">
-        <img src={Account} alt="account" className="w-6 h-6" />
-        <p className="font-semibold text-white text-center">
-          {user ? user.name : ""}
-        </p>
+    <div className="from-darkgreen to-springgreen h-full w-full bg-linear-to-br p-3">
+      <div className="flex flex-col">
+        <div className="my-6 flex justify-center gap-4">
+          <img src={Account} alt="account" className="h-6 w-6" />
+          <p className="text-center font-semibold text-white">
+            {user ? user.name : ""}
+          </p>
+        </div>
+        <Logout />
       </div>
 
-      <div className="[&>*]:first:mb-6">
+      <div className="[&>*]:first:mt-12">
         <OutletLink
           name="Home"
           link=""

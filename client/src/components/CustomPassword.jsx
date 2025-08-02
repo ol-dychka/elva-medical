@@ -8,7 +8,7 @@ const CustomPassword = ({ name, value, onChange }) => {
   return (
     <div className="relative">
       <input
-        className="border-2 border-slate-300 p-4 rounded-xl focus:outline-emerald-800"
+        className="border-aliceblue focus:outline-springgreen rounded-xl border-2 p-4"
         type={shown ? "text" : "password"}
         placeholder={name}
         value={value}
@@ -18,7 +18,7 @@ const CustomPassword = ({ name, value, onChange }) => {
         src={shown ? Shown : Hidden}
         alt="show password"
         onClick={() => setShown(!shown)}
-        className="absolute -right-8 top-3/10 w-6 h-6 cursor-pointer"
+        className="absolute top-3/10 -right-8 h-6 w-6 cursor-pointer"
       />
     </div>
   );

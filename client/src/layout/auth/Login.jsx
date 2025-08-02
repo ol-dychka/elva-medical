@@ -28,12 +28,12 @@ const Login = () => {
   };
 
   return (
-    <div className="p-8 flex flex-col justify-between h-lvh">
-      <p className="text-center text-3xl text-emerald-700 font-semibold">
+    <div className="flex h-lvh flex-col justify-between p-8">
+      <p className="text-springgreen text-center text-3xl font-semibold">
         Login to Elva
       </p>
       <form onSubmit={handleLogin}>
-        <div className="flex flex-col justify-center items-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2">
           <CustomInput name="Email" value={email} onChange={setEmail} />
           <CustomPassword
             name="Password"
@@ -43,25 +43,25 @@ const Login = () => {
 
           <button
             type="submit"
-            className="rounded-xl text-white font-semibold bg-emerald-800 py-4 px-8 cursor-pointer"
+            className="bg-springgreen cursor-pointer rounded-xl px-8 py-4 font-semibold text-white"
           >
             Log In
           </button>
-          {error && <p className="text-red-400">{error}</p>}
+          {error && <p className="text-crayola">{error}</p>}
         </div>
       </form>
 
-      <p className="text-emerald-800 text-center">
+      <p className="text-springgreen text-center">
         First time here?{" "}
         <span
-          className="underline cursor-pointer"
+          className="cursor-pointer underline"
           onClick={() => navigate("/register")}
         >
           Register
         </span>
       </p>
 
-      <div className="flex gap-8 items-center justify-center">
+      <div className="flex items-center justify-center gap-8">
         <img src={Facebook} alt="facebook" className="h-7 w-7" />
         <img src={Instagram} alt="Instagram" className="h-8 w-8" />
         <img src={Gmail} alt="gmail" className="h-9 w-9" />

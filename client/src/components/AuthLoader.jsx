@@ -1,3 +1,6 @@
+// case if user is on a dashboard but not logged in
+// redirecting to login page
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -19,6 +22,7 @@ const AuthLoader = ({ children }) => {
 
         if (!tokenRes.data?.accessToken) {
           navigate("/login");
+          console.log("nigga");
           return;
         }
 

@@ -1,4 +1,18 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-darkgreen: #003b36;
+  --color-springgreen: #047857;
+
+  --color-richblack: #0d1b1e;
+  --color-gunmetal: #1e2932;
+
+  --color-aliceblue: #e2e8f0;
+  --color-ghostwhite: #f2f2f9;
+
+  --color-crayola: #ef476f;
+}
 
 #root {
   margin: 0;

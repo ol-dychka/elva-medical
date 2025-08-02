@@ -9,12 +9,21 @@ import AuthLoader from "../components/AuthLoader";
 import Appointments from "./outlets/appointments/Appointments";
 import Prescriptions from "./outlets/prescriptions/Prescriptions";
 import Profile from "./outlets/Profile";
+import ThemeProvider from "../components/ThemeProvider";
+import AuthChecker from "../components/AuthChecker";
 
 const App = () => {
   return (
-    <AuthLoader>
+    <ThemeProvider>
       <Routes>
-        <Route path="/" element={<Dashboard />}>
+        <Route
+          path="/"
+          element={
+            <AuthLoader>
+              <Dashboard />
+            </AuthLoader>
+          }
+        >
           <Route index element={<Home />} />
           <Route path="billing" element={<Billing />} />
           <Route path="courses" element={<Courses />} />
@@ -25,7 +34,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Routes>
-    </AuthLoader>
+    </ThemeProvider>
   );
 };
 export default App;

@@ -38,7 +38,7 @@ const Register = () => {
 
     if (!passwordPattern.test(password)) {
       setError(
-        "Password must be 8+ characters with a capital letter and a number"
+        "Password must be 8+ characters with a capital letter and a number",
       );
       return;
     }
@@ -52,7 +52,7 @@ const Register = () => {
           phone,
         },
         dispatch,
-        navigate
+        navigate,
       );
     } catch (err) {
       setError(err.message);
@@ -60,12 +60,12 @@ const Register = () => {
   };
 
   return (
-    <div className="p-8 flex flex-col justify-between h-lvh">
-      <p className="text-center text-3xl text-emerald-700 font-semibold">
+    <div className="flex h-lvh flex-col justify-between p-8">
+      <p className="text-springgreen text-center text-3xl font-semibold">
         Elva Registration
       </p>
       <form onSubmit={handleRegister}>
-        <div className="flex flex-col justify-center items-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2">
           <CustomInput name="Full Name" value={name} onChange={setName} />
           <CustomInput name="Email" value={email} onChange={setEmail} />
           <CustomInput name="Phone Number" value={phone} onChange={setPhone} />
@@ -82,25 +82,25 @@ const Register = () => {
 
           <button
             type="submit"
-            className="rounded-xl text-white font-semibold bg-emerald-800 py-4 px-8 cursor-pointer"
+            className="bg-springgreen cursor-pointer rounded-xl px-8 py-4 font-semibold text-white"
           >
             Register
           </button>
-          {error && <p className="text-red-400">{error}</p>}
+          {error && <p className="text-crayola">{error}</p>}
         </div>
       </form>
 
-      <p className="text-emerald-800 text-center">
+      <p className="text-springgreen text-center">
         Already registered?{" "}
         <span
-          className="underline cursor-pointer"
+          className="cursor-pointer underline"
           onClick={() => navigate("/login")}
         >
           Log In
         </span>
       </p>
 
-      <div className="flex gap-8 items-center justify-center">
+      <div className="flex items-center justify-center gap-8">
         <img src={Facebook} alt="facebook" className="h-7 w-7" />
         <img src={Instagram} alt="Instagram" className="h-8 w-8" />
         <img src={Gmail} alt="gmail" className="h-9 w-9" />

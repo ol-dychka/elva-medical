@@ -1,12 +1,16 @@
+import IconSun from "../icons/IconSun";
 import Search from "../assets/search.svg";
 import Settings from "../assets/settings.svg";
 import Logout from "../components/Logout";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Navbar = () => {
   return (
-    <div className="bg-slate-200 w-full p-4 flex justify-between items-center shadow-2xl shadow-slate-200">
-      <p className="text-emerald-700 font-bold text-3xl">Elva</p>
-      <div className="bg-white rounded-4xl p-2 flex items-center">
+    <div className="bg-aliceblue shadow-aliceblue dark:shadow-gunmetal dark:bg-gunmetal flex w-full items-center justify-between p-4 shadow-2xl">
+      <p className="text-springgreen dark:text-aliceblue text-3xl font-bold">
+        Elva
+      </p>
+      <div className="flex items-center rounded-4xl bg-white p-2">
         <input
           type="text"
           placeholder="Search"
@@ -14,8 +18,7 @@ const Navbar = () => {
         />
         <img src={Search} alt="Search" className="h-6 w-6" />
       </div>
-      <Logout />
-      <img src={Settings} alt="Settings" className="h-6 w-6" />
+      <ThemeToggle />
     </div>
   );
 };

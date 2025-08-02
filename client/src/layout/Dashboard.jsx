@@ -9,7 +9,7 @@ const Dashboard = () => {
         <div className="basis-1/5">
           <Sidebar />
         </div>
-        <div className="flex flex-col w-screen">
+        <div className="dark:bg-richblack flex w-screen flex-col">
           <Navbar />
           <Outlet />
         </div>

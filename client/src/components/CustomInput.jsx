@@ -1,7 +1,7 @@
 const CustomInput = ({ name, value, onChange }) => {
   return (
     <input
-      className="border-2 border-slate-300 p-4 rounded-xl focus:outline-emerald-800"
+      className="border-aliceblue focus:outline-springgreen rounded-xl border-2 p-4"
       type="text"
       placeholder={name}
       value={value}
