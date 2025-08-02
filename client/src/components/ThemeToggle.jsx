@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setTheme } from "../store/reducers/theme";
-import IconMoon from "../icons/IconMoon";
-import IconSun from "../icons/IconSun";
+import Icon from "../icons/Icon";
 
 const ThemeToggle = () => {
   const dispatch = useDispatch();
@@ -12,13 +11,13 @@ const ThemeToggle = () => {
         onClick={() => dispatch(setTheme("light"))}
         className="cursor-pointer"
       >
-        <IconSun className="text-springgreen dark:text-aliceblue" />
+        <Icon name="sun" className="text-springgreen dark:text-aliceblue" />
       </button>
       <button
         onClick={() => dispatch(setTheme("dark"))}
         className="cursor-pointer"
       >
-        <IconMoon className="dark:text-springgreen text-gunmetal" />
+        <Icon name="moon" className="dark:text-springgreen text-gunmetal" />
       </button>
     </div>
   );

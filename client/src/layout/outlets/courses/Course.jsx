@@ -1,8 +1,5 @@
 import { formatDate } from "../../../helpers/formatDate";
-import Leaf from "../../../assets/leaf.svg";
-import Calendar from "../../../assets/calendar.svg";
-import Clock from "../../../assets/clock.svg";
-import Account from "../../../assets/account-bl.svg";
+import Icon from "../../../icons/Icon";
 
 const Course = ({ course }) => {
   const { title, instructor, finishDate, startDate, schedule } = course;
@@ -15,16 +12,17 @@ const Course = ({ course }) => {
   return (
     <div className="relative [&>*]:p-4">
       <div className="bg-springgreen flex items-center gap-4 rounded-t-lg font-semibold text-white">
-        <img src={Leaf} alt="pill" className="h-6 w-6" />
+        <Icon name="leaf" className="text-white" />
         <p>{title}</p>
       </div>
       <div className="bg-ghostwhite dark:bg-gunmetal space-y-4 rounded-b-lg dark:text-white">
         <div className="flex items-center gap-4">
-          <img src={Account} alt="account" className="h-4 w-4" />
+          <Icon name="account" className="text-richblack dark:text-white" />
+
           <p>{instructor}</p>
         </div>
         <div className="flex items-center gap-4">
-          <img src={Calendar} alt="calendar" className="h-4 w-4" />
+          <Icon name="calendar" className="text-richblack dark:text-white" />
           <div>
             {formattedSchedule.map((session, index) => (
               <p key={index}>{session}</p>
@@ -32,7 +30,7 @@ const Course = ({ course }) => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <img src={Clock} alt="clock" className="h-4 w-4" />
+          <Icon name="clock" className="text-richblack dark:text-white" />
           <p>
             {formattedStartDate} - {formattedFinishDate}
           </p>

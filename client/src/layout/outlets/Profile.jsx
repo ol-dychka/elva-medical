@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import EditInput from "../../components/EditInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../api/api";
 import { setUser } from "../../store/reducers/user";
 
@@ -8,8 +8,8 @@ const Profile = () => {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState(user.name);
+  const [phone, setPhone] = useState(user.phone);
 
   const handleSave = async () => {
     try {
@@ -21,14 +21,6 @@ const Profile = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    console.log(user);
-    if (user) {
-      setName(user.name);
-      setPhone(user.phone);
-    }
-  }, [user]);
 
   return (
     <div className="relative h-full px-4 py-8">

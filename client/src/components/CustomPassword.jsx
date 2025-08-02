@@ -1,6 +1,5 @@
-import Shown from "../assets/eye.svg";
-import Hidden from "../assets/eye-slash.svg";
 import { useState } from "react";
+import Icon from "../icons/Icon";
 
 const CustomPassword = ({ name, value, onChange }) => {
   const [shown, setShown] = useState(false);
@@ -14,12 +13,16 @@ const CustomPassword = ({ name, value, onChange }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <img
-        src={shown ? Shown : Hidden}
-        alt="show password"
+      <button
+        type="button"
         onClick={() => setShown(!shown)}
-        className="absolute top-3/10 -right-8 h-6 w-6 cursor-pointer"
-      />
+        className="absolute top-3/10 -right-8 cursor-pointer"
+      >
+        <Icon
+          name={shown ? "eye" : "eyeCrossed"}
+          className="text-springgreen"
+        />
+      </button>
     </div>
   );
 };

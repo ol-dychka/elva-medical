@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Check from "../assets/check-circle.svg";
-import Edit from "../assets/edit-square.svg";
+import Icon from "../icons/Icon";
 
 const EditInput = ({ name, value, onChange }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -19,12 +18,12 @@ const EditInput = ({ name, value, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
         disabled={!isEdit}
       />
-      <img
-        src={isEdit ? Check : Edit}
-        alt="check"
-        className="h-6 w-6 cursor-pointer"
-        onClick={() => setIsEdit(!isEdit)}
-      />
+      <button className="cursor-pointer" onClick={() => setIsEdit(!isEdit)}>
+        <Icon
+          name={isEdit ? "checkCircle" : "edit"}
+          className="text-springgreen"
+        />
+      </button>
     </div>
   );
 };

@@ -1,13 +1,9 @@
-import Clock from "../../../assets/clock.svg";
-import Door from "../../../assets/door.svg";
-import Calendar from "../../../assets/calendar-edit.svg";
-import Account from "../../../assets/account-bl.svg";
-import Check from "../../../assets/check-circle-wh.svg";
 import { useState } from "react";
 import api from "../../../api/api";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../store/reducers/user";
 import { formatDateTime } from "../../../helpers/formatDate";
+import Icon from "../../../icons/Icon";
 
 const Appointment = ({ appointment }) => {
   const dispatch = useDispatch();
@@ -40,24 +36,25 @@ const Appointment = ({ appointment }) => {
     <div className="relative [&>*]:p-4">
       <div className="bg-springgreen flex items-center justify-between rounded-t-lg font-semibold text-white">
         <p>{title}</p>
-        <img
-          src={isCalendar ? Check : Calendar}
-          alt="calendar"
-          className="h-6 w-6 cursor-pointer"
-          onClick={handleCalendar}
-        />
+        <button className="cursor-pointer" onClick={handleCalendar}>
+          <Icon
+            name={isCalendar ? "checkCircle" : "calendarEdit"}
+            className="text-white"
+          />
+        </button>
       </div>
       <div className="bg-ghostwhite dark:bg-gunmetal space-y-4 rounded-b-lg dark:text-white">
         <div className="flex items-center gap-4">
-          <img src={Account} alt="account" className="h-4 w-4" />
+          <Icon name="account" className="text-richblack dark:text-white" />
           <p>{doctorName}</p>
         </div>
         <div className="flex items-center gap-4">
-          <img src={Door} alt="door" className="h-4 w-4" />
+          <Icon name="door" className="text-richblack dark:text-white" />
           <p>{roomNumber}</p>
         </div>
         <div className="flex items-center gap-4">
-          <img src={Clock} alt="clock" className="h-4 w-4" />
+          <Icon name="clock" className="text-richblack dark:text-white" />
+
           <p>{formattedDate}</p>
         </div>
       </div>

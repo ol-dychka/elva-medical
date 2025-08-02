@@ -3,7 +3,7 @@ import OutletLink from "../components/OutletLink";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Logout from "../components/Logout";
-import Account from "../assets/account.svg";
+import Icon from "../icons/Icon";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.user.value);
@@ -23,7 +23,8 @@ const Sidebar = () => {
     <div className="from-darkgreen to-springgreen h-full w-full bg-linear-to-br p-3">
       <div className="flex flex-col">
         <div className="my-6 flex justify-center gap-4">
-          <img src={Account} alt="account" className="h-6 w-6" />
+          <Icon name="account" className="text-white" />
+
           <p className="text-center font-semibold text-white">
             {user ? user.name : ""}
           </p>

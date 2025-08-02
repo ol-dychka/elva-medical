@@ -1,8 +1,5 @@
-import IconSun from "../icons/IconSun";
-import Search from "../assets/search.svg";
-import Settings from "../assets/settings.svg";
-import Logout from "../components/Logout";
 import ThemeToggle from "../components/ThemeToggle";
+import Icon from "../icons/Icon";
 
 const Navbar = () => {
   return (
@@ -16,7 +13,9 @@ const Navbar = () => {
           placeholder="Search"
           className="mx-2 border-none focus:outline-none"
         />
-        <img src={Search} alt="Search" className="h-6 w-6" />
+        <button>
+          <Icon name="search" className="text-richblack" />
+        </button>
       </div>
       <ThemeToggle />
     </div>
