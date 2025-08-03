@@ -1,6 +1,6 @@
-import api from "../api/api";
-import { removeUser, setUser } from "../store/reducers/user";
-import { removeToken, setToken } from "../store/reducers/token";
+import api from "@/api/api";
+import { removeUser, setUser } from "@/store/reducers/user";
+import { removeToken, setToken } from "@/store/reducers/token";
 import axios from "axios";
 
 const logout = async (dispatch, navigate) => {

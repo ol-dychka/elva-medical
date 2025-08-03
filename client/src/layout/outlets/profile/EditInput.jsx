@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Icon from "../icons/Icon";
+import Icon from "@/icons/Icon";
 
 const EditInput = ({ name, value, onChange }) => {
   const [isEdit, setIsEdit] = useState(false);

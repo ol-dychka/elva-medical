@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store/store";
+import store from "@/store/store";
 
 // Create Axios instance
 const api = axios.create({
@@ -17,7 +17,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 export default api;

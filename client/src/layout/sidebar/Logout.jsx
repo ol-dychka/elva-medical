@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { logout } from "../handlers/authHandlers";
+import { logout } from "@/handlers/authHandlers";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Logout = () => {
 
   return (
     <button
-      className="rounded-xl bg-white text-springgreen py-2 px-8 font-semibold cursor-pointer"
+      className="text-springgreen cursor-pointer rounded-xl bg-white px-8 py-2 font-semibold"
       onClick={handleLogout}
     >
       Log Out

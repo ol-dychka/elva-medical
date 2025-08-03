@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import EditInput from "../../components/EditInput";
+import EditInput from "./EditInput";
 import { useState } from "react";
-import api from "../../api/api";
-import { setUser } from "../../store/reducers/user";
+import api from "@/api/api";
+import { setUser } from "@/store/reducers/user";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.value);

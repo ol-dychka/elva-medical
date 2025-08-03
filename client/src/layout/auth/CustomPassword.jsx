@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Icon from "../icons/Icon";
+import Icon from "@/icons/Icon";
 
 const CustomPassword = ({ name, value, onChange }) => {
   const [shown, setShown] = useState(false);

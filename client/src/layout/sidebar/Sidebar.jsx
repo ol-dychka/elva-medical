@@ -1,9 +1,9 @@
 import { useLocation } from "react-router";
-import OutletLink from "../components/OutletLink";
+import OutletLink from "./OutletLink";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Logout from "../components/Logout";
-import Icon from "../icons/Icon";
+import Logout from "./Logout";
+import Icon from "@/icons/Icon";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.user.value);

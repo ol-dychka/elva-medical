@@ -1,9 +1,9 @@
 import { useState } from "react";
-import api from "../../../api/api";
+import api from "@/api/api";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../store/reducers/user";
-import { formatDateTime } from "../../../helpers/formatDate";
-import Icon from "../../../icons/Icon";
+import { setUser } from "@/store/reducers/user";
+import { formatDateTime } from "@/helpers/formatDate";
+import Icon from "@/icons/Icon";
 
 const Appointment = ({ appointment }) => {
   const dispatch = useDispatch();

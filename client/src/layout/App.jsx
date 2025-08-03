@@ -1,16 +1,17 @@
 import { Route, Routes } from "react-router";
+
 import Dashboard from "./Dashboard";
 import Billing from "./outlets/Billing";
 import Courses from "./outlets/courses/Courses";
 import Home from "./outlets/Home";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
-import AuthLoader from "../components/AuthLoader";
+import Profile from "./outlets/profile/Profile";
 import Appointments from "./outlets/appointments/Appointments";
 import Prescriptions from "./outlets/prescriptions/Prescriptions";
-import Profile from "./outlets/Profile";
-import ThemeProvider from "../components/ThemeProvider";
-import AuthChecker from "../components/AuthChecker";
+
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import AuthLoader from "./AuthLoader";
+import ThemeProvider from "./ThemeProvider";
 
 const App = () => {
   return (

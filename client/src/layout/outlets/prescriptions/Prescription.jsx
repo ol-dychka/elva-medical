@@ -1,5 +1,5 @@
-import { formatDate } from "../../../helpers/formatDate";
-import Icon from "../../../icons/Icon";
+import { formatDate } from "@/helpers/formatDate";
+import Icon from "@/icons/Icon";
 
 const Prescription = ({ prescription }) => {
   const { startDate, finishDate, frequency, medication } = prescription;

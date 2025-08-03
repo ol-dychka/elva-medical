@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { setTheme } from "../store/reducers/theme";
-import Icon from "../icons/Icon";
+import { setTheme } from "@/store/reducers/theme";
+import Icon from "@/icons/Icon";
 
 const ThemeToggle = () => {
   const dispatch = useDispatch();

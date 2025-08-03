@@ -1,5 +1,5 @@
-import { formatDate } from "../../../helpers/formatDate";
-import Icon from "../../../icons/Icon";
+import { formatDate } from "@/helpers/formatDate";
+import Icon from "@/icons/Icon";
 
 const Course = ({ course }) => {
   const { title, instructor, finishDate, startDate, schedule } = course;

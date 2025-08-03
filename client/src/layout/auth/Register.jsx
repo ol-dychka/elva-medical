@@ -1,12 +1,12 @@
-import CustomInput from "../../components/CustomInput";
-import CustomPassword from "../../components/CustomPassword";
-import Facebook from "../../assets/facebook-color.svg";
-import Instagram from "../../assets/instagram-color.svg";
-import Gmail from "../../assets/gmail-color.svg";
+import CustomInput from "./CustomInput";
+import CustomPassword from "./CustomPassword";
+import Facebook from "@/assets/facebook-color.svg";
+import Instagram from "@/assets/instagram-color.svg";
+import Gmail from "@/assets/gmail-color.svg";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { register } from "../../handlers/authHandlers";
+import { register } from "@/handlers/authHandlers";
 
 const Register = () => {
   const navigate = useNavigate();
