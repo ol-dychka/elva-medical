@@ -8,6 +8,7 @@ namespace server.Models
         public List<Course> Courses { get; set; } = courses;
         public List<AppointmentDto> Appointments { get; set; } =
             [.. user.Appointments.Select(a => new AppointmentDto(a))];
-        public List<Prescription> Prescriptions { get; set; } = user.Prescriptions;
+        public List<PrescriptionDto> Prescriptions { get; set; } =
+            [.. user.Prescriptions.Select(p => new PrescriptionDto(p))];
     }
 }

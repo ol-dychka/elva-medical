@@ -1,9 +1,13 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace server.Models
 {
     public class Prescription
     {
+        [BsonElement("id")]
+        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        
         [BsonElement("medication")]
         public required string Medication { get; set; }
 
