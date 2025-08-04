@@ -41,7 +41,7 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
-StripeConfiguration.ApiKey = "sk_test_51N11SGBFUFAjc34BNR0Bo86R13ew2dDC85brFJCKs9Pm5yoXjuMN6sWURqysZvqPAZuGfQo0Q3FNq6T8WYmLF9fV00P0aYM1td";
+StripeConfiguration.ApiKey = builder.Configuration["StripeApiKey"];
 
 var app = builder.Build();
 
