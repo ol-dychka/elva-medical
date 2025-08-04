@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using server.Services;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers(options =>
     options.Conventions.Insert(0, new GlobalRoutePrefixConvention("api"));
 });
 builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<server.Services.TokenService>();
 builder.Services.AddSingleton<CourseService>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -39,6 +40,8 @@ builder.Services.AddAuthentication("Bearer")
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
         };
     });
+
+StripeConfiguration.ApiKey = "sk_test_51N11SGBFUFAjc34BNR0Bo86R13ew2dDC85brFJCKs9Pm5yoXjuMN6sWURqysZvqPAZuGfQo0Q3FNq6T8WYmLF9fV00P0aYM1td";
 
 var app = builder.Build();
 

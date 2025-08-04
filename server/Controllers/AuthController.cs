@@ -9,7 +9,7 @@ using server.Services;
 namespace server.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("auth")] 
     public class AuthController(UserService userService, TokenService tokenService, CourseService courseService, IConfiguration config) : ControllerBase
     {
         private readonly UserService _userService = userService;
