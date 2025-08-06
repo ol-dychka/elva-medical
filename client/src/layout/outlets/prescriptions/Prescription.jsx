@@ -7,7 +7,7 @@ const Prescription = ({ prescription }) => {
   const formattedFinishDate = formatDate(finishDate);
 
   return (
-    <div className="relative [&>*]:p-4">
+    <div className="shadow-lg [&>*]:p-4">
       <div className="bg-springgreen flex items-center gap-4 rounded-t-lg font-semibold text-white">
         <Icon name="pill" className="text-white" />
 

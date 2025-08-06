@@ -9,4 +9,5 @@ export default configureStore({
     token: tokenReducer,
     theme: themeReducer,
   },
+  devTools: true,
 });

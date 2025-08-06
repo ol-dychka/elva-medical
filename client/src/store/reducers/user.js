@@ -7,6 +7,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
+      console.log("dispatched set user");
       state.value = action.payload;
     },
     removeUser: (state) => {

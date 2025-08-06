@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 
 import Dashboard from "./Dashboard";
-import Billing from "./outlets/billing/Billing";
+import Payments from "./outlets/payments/Payments";
 import Courses from "./outlets/courses/Courses";
 import Home from "./outlets/Home";
 import Profile from "./outlets/profile/Profile";
@@ -12,8 +12,12 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AuthLoader from "./AuthLoader";
 import ThemeProvider from "./ThemeProvider";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const user = useSelector((state) => state.user.value);
+  console.log("APP LEVEL: ", user);
+
   return (
     <ThemeProvider>
       <Routes>
@@ -26,7 +30,7 @@ const App = () => {
           }
         >
           <Route index element={<Home />} />
-          <Route path="billing" element={<Billing />} />
+          <Route path="payments" element={<Payments />} />
           <Route path="courses" element={<Courses />} />
           <Route path="appointments" element={<Appointments />} />
           <Route path="prescriptions" element={<Prescriptions />} />

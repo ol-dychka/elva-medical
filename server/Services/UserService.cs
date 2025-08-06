@@ -105,5 +105,15 @@ namespace server.Services
 
             await _users.UpdateOneAsync(filter, update);
         }
+
+        public async Task DeletePaymentAsync(string userId, ObjectId paymentId)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+
+            var update = Builders<User>.Update.PullFilter(u => u.Payments,
+                p => p.Id == paymentId);
+
+            await _users.UpdateOneAsync(filter, update);
+        }
     }
 }

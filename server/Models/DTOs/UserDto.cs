@@ -10,5 +10,7 @@ namespace server.Models
             [.. user.Appointments.Select(a => new AppointmentDto(a))];
         public List<PrescriptionDto> Prescriptions { get; set; } =
             [.. user.Prescriptions.Select(p => new PrescriptionDto(p))];
+        public List<PaymentDto> Payments { get; set; } =
+            [.. user.Payments.Select(p => new PaymentDto(p))];
     }
 }

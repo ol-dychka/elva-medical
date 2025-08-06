@@ -10,7 +10,7 @@ const Course = ({ course }) => {
   );
 
   return (
-    <div className="relative [&>*]:p-4">
+    <div className="shadow-lg [&>*]:p-4">
       <div className="bg-springgreen flex items-center gap-4 rounded-t-lg font-semibold text-white">
         <Icon name="leaf" className="text-white" />
         <p>{title}</p>

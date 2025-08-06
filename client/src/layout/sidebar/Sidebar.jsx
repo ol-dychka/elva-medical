@@ -64,10 +64,10 @@ const Sidebar = () => {
           setSelected={() => setSelected("profile")}
         />
         <OutletLink
-          name="Billing"
-          link="billing"
-          isSelected={outlet == "billing"}
-          setSelected={() => setSelected("billing")}
+          name="Payments"
+          link="payments"
+          isSelected={outlet == "payments"}
+          setSelected={() => setSelected("payments")}
         />
       </div>
     </div>

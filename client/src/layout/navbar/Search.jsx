@@ -97,7 +97,7 @@ const Search = () => {
                 }}
               >
                 <Icon
-                  name="arrowRight"
+                  name="arrow"
                   className="text-richblack hover:text-springgreen dark:text-white"
                 />
               </button>

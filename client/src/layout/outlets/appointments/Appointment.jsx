@@ -28,12 +28,14 @@ const Appointment = ({ appointment }) => {
         date: `${newDate}T${newTime}`,
       });
 
+      console.log("app user upd.: ", res.data);
+
       if (res.data) dispatch(setUser(res.data));
     }
   };
 
   return (
-    <div className="relative [&>*]:p-4">
+    <div className="relative shadow-lg [&>*]:p-4">
       <div className="bg-springgreen flex items-center justify-between rounded-t-lg font-semibold text-white">
         <p>{title}</p>
         <button className="cursor-pointer" onClick={handleCalendar}>
