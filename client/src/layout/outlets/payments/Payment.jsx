@@ -25,23 +25,23 @@ const Payment = ({ payment }) => {
         {`$ ${amount / 100}.00`}
       </div>
       <div className="bg-ghostwhite dark:bg-gunmetal space-y-4 rounded-b-lg dark:text-white">
-        <div className="flex items-center gap-4">
-          <Icon name="clock" className="text-richblack dark:text-white" />
-          <p>{formattedIssueDate}</p>
-        </div>
-        {isOpen && (
-          <Elements stripe={stripePromise}>
-            <PaymentForm amount={amount} id={id} />
-          </Elements>
-        )}
-        <div className="flex justify-center">
-          <button onClick={() => setIsOpen(!isOpen)}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Icon name="clock" className="text-richblack dark:text-white" />
+            <p>{formattedIssueDate}</p>
+          </div>
+          <button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
             <Icon
               name="arrow"
               className={`text-richblack ${isOpen ? "rotate-270" : "rotate-90"} transform transition-transform duration-300 ease-in-out dark:text-white`}
             />
           </button>
         </div>
+        {isOpen && (
+          <Elements stripe={stripePromise}>
+            <PaymentForm amount={amount} id={id} />
+          </Elements>
+        )}
       </div>
     </div>
   );

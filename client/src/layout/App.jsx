@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router";
 import Dashboard from "./Dashboard";
 import Payments from "./outlets/payments/Payments";
 import Courses from "./outlets/courses/Courses";
-import Home from "./outlets/Home";
+import Home from "./outlets/home/Home";
 import Profile from "./outlets/profile/Profile";
 import Appointments from "./outlets/appointments/Appointments";
 import Prescriptions from "./outlets/prescriptions/Prescriptions";

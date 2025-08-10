@@ -65,7 +65,7 @@ const Appointment = ({ appointment }) => {
         <div className="absolute top-0 -right-50 flex flex-col gap-4">
           <input
             type="date"
-            className="focus:outline-springgreen border-aliceblue rounded-xl border-2 p-2"
+            className="focus:outline-springgreen text-richblack border-aliceblue rounded-xl border-2 p-2 dark:text-white dark:scheme-dark"
             onChange={(e) => {
               setNewDate(e.target.value);
             }}
@@ -73,7 +73,7 @@ const Appointment = ({ appointment }) => {
           <input
             type="time"
             step="60"
-            className="focus:outline-springgreen border-aliceblue rounded-xl border-2 p-2"
+            className="focus:outline-springgreen text-richblack border-aliceblue rounded-xl border-2 p-2 dark:text-white dark:scheme-dark"
             onChange={(e) => {
               setNewTime(e.target.value);
             }}

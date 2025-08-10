@@ -45,7 +45,7 @@ const PaymentForm = ({ amount, id }) => {
           style: {
             base: {
               fontSize: "16px",
-              color: "#1e2932",
+              color: "#868d8f",
               fontFamily: "Arial, sans-serif",
               "::placeholder": {
                 color: "#868d8f",
